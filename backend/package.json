@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sannidhyas05/Campus_Catalyst.git"
+  },
+  "keywords": [
+    "project",
+    "backend"
+  ],
+  "author": "Sannidhya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sannidhyas05/Campus_Catalyst/issues"
+  },
+  "homepage": "https://github.com/Sannidhyas05/Campus_Catalyst#readme",
+  "description": ""
+}
