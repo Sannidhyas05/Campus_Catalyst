@@ -3,15 +3,16 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import postsRoutes from "./routes/posts.routes.js";
+import userRoutes from "./routes/users.routes.js";
 
 dotenv.config();
 
 const app = express();
 app.use(cors()); // user doesn't allow exception
 
-app.use("/posts", postsRoutes);
-
 app.use(express.json());
+app.use("/api/users", userRoutes);
+app.use("/posts", postsRoutes);
 
 const start = async () => {
   const connectDB = await mongoose.connect(

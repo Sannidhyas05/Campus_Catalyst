@@ -1,8 +1,8 @@
-import { Router } from "express";
+import express from "express";
 import { activeCheck } from "../controllers/posts.controller.js";
 
-const router = Router();
+const router = express.Router();
 
-router.route("/").get(activeCheck);
+router.get("/", activeCheck);
 
 export default router;
