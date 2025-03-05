@@ -5,7 +5,39 @@ content-Type: application/json
   "sapId": "500108008",
   "name": "Sannidhya",
   "email": "sannidhya.108008@stu.upes.ac.in",
-  "password": "123456",
+  "password": "s123456789",
   "role": "Student"
+}
+
+###
+
+POST http://localhost:9080/api/users/login HTTP/1.1
+content-Type: application/json
+
+{
+  "email": "sannidhya.108008@stu.upes.ac.in",
+  "password": "s123456789"
+}
+
+###
+POST http://localhost:9080/api/users/register HTTP/1.1
+content-Type: application/json
+
+{
+  "sapId": "500095833",
+  "name": "khushi",
+  "email": "500095833@stu.upes.ac.in",
+  "password": "s12345678",
+  "role": "Student"
+}
+
+###
+
+POST http://localhost:9080/api/users/login HTTP/1.1
+content-Type: application/json
+
+{
+  "email": "500095833@stu.upes.ac.in",
+  "password": "s12345678"
 }
 
