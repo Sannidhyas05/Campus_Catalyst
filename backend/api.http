@@ -34,3 +34,17 @@ content-Type: application/json
   "username": "ria108279"
 }
 
+###
+POST http://localhost:9080/api/users/login HTTP/1.1
+content-Type: application/json
+
+{
+  "email": "ria.108279@stu.upes.ac.in",
+  "password": "s12345678"
+}
+
+###
+GET http://localhost:9080/api/users/profile HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDJlZGY3MDAwMDFmNzMwNzExMzk3YyIsInNhcElkIjoiNTAwMTA4Mjc5Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDE4ODYyNzMsImV4cCI6MTc0MjQ5MTA3M30.HJ-m2iOqzU5rGcj2mcrINkLzZnCeFuHY1u68okaqeHk
+Content-Type: application/json
+

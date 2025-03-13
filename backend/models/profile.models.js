@@ -8,6 +8,12 @@ const profileSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
     bio: {
       type: String,
       trim: true,
@@ -32,8 +38,10 @@ const profileSchema = new mongoose.Schema(
     ],
     projects: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Post", // Refers to the Post model
+        title: String,
+        description: String,
+        date: Date,
+        link: String,
       },
     ],
   },

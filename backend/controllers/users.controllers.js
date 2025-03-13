@@ -1,4 +1,5 @@
 import User from "../models/users.models.js";
+import Profile from "../models/profile.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -33,8 +34,24 @@ export const registerUser = async (req, res) => {
       role, // Student, Teacher, Admin
       username,
     });
+    await newUser.save();
 
-    res.status(201).json({
+    const newProfile = await Profile.create({
+      user: newUser._id, // Reference user ID
+      username, // Set username
+      bio: "", // Default empty bio
+      skills: [],
+      socialLinks: {
+        linkedin: "",
+        github: "",
+        website: "",
+      },
+      achievements: [],
+      projects: [],
+    });
+    await newProfile.save();
+
+    return res.status(201).json({
       message: "User registered successfully!",
       user: {
         id: newUser._id,
@@ -42,11 +59,16 @@ export const registerUser = async (req, res) => {
         name: newUser.name,
         email: newUser.email,
         role: newUser.role,
+        username: newUser.username,
+      },
+      profile: {
+        id: newProfile._id,
+        username: newProfile.username,
       },
     });
   } catch (error) {
     console.error("Registration error:", error);
-    res.status(500).json({ message: "Error registering user", error });
+    return res.status(500).json({ message: "Error registering user", error });
   }
 };
 
@@ -82,7 +104,7 @@ export const loginUser = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Login successful!",
       token,
       user: {
@@ -91,11 +113,12 @@ export const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        username: user.username,
       },
     });
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ message: "Error logging in", error });
+    return res.status(500).json({ message: "Error logging in", error });
   }
 };
 
@@ -130,13 +153,13 @@ export const updateProfilePic = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Profile picture updated successfully!",
       profilePic: user.profilePic,
     });
   } catch (error) {
     console.error("Error uploading profile picture:", error);
-    res.status(500).json({ message: "Server error", error });
+    return res.status(500).json({ message: "Server error", error });
   }
 };
 
@@ -178,7 +201,7 @@ export const updateUsername = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Username updated successfully!",
       user: {
         id: updatedUser._id,
@@ -187,6 +210,80 @@ export const updateUsername = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating username:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
+  }
+};
+
+// Get User Profile
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const token = req.header("Authorization");
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Access denied. No token provided." });
+    }
+
+    // Decode token without verification
+    const decoded = jwt.decode(token.replace("Bearer ", ""));
+
+    if (!decoded || !decoded.id) {
+      return res.status(400).json({ message: "Invalid token." });
+    }
+
+    const userId = decoded.id;
+
+    const profile = await Profile.findOne({ user: userId }).populate(
+      "user",
+      "sapId name email role username"
+    );
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found." });
+    }
+
+    res.status(200).json(profile);
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ message: "Error retrieving profile", error });
+  }
+};
+
+//Update Profile
+
+export const updateProfileData = async (req, res) => {
+  try {
+    const token = req.header("Authorization");
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Access denied. No token provided." });
+    }
+
+    const decoded = jwt.decode(token.replace("Bearer ", ""));
+    if (!decoded || !decoded.id) {
+      return res.status(400).json({ message: "Invalid token." });
+    }
+
+    const userId = decoded.id;
+    const newProfileData = req.body;
+
+    const profile = await Profile.findOne({ user: userId });
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found." });
+    }
+
+    Object.assign(profile, newProfileData);
+    await profile.save();
+
+    return res
+      .status(200)
+      .json({ message: "Profile updated successfully", profile });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    return res.status(500).json({ message: "Error updating profile", error });
   }
 };

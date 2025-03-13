@@ -1,9 +1,11 @@
 import express from "express";
 import {
+  getUserProfile,
   loginUser,
   registerUser,
   updateProfilePic,
   updateUsername,
+  updateProfileData,
 } from "../controllers/users.controllers.js";
 import multer from "multer";
 
@@ -26,5 +28,8 @@ router.post("/login", loginUser);
 router.post("/upload", upload.single("profile_picture"), updateProfilePic);
 
 router.put("/updateUsername", updateUsername);
+
+router.get("/profile", getUserProfile);
+router.post("/updateProfileData", updateProfileData);
 
 export default router;
