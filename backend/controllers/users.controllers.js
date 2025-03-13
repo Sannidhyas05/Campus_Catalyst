@@ -124,7 +124,7 @@ export const loginUser = async (req, res) => {
 
 // User Profile Pictue Upload
 
-export const updateProfilePic = async (req, res) => {
+export const updateProfilePicture = async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
 
@@ -285,5 +285,19 @@ export const updateProfileData = async (req, res) => {
   } catch (error) {
     console.error("Error updating profile:", error);
     return res.status(500).json({ message: "Error updating profile", error });
+  }
+};
+
+//GET ALL USERS
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate(
+      "user",
+      "sapId name email role username profilePicture"
+    );
+    return res.status(200).json(profiles);
+  } catch (error) {
+    return res.status(5000).json({ message: "Error fetching users", error });
   }
 };

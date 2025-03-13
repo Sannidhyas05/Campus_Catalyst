@@ -3,9 +3,10 @@ import {
   getUserProfile,
   loginUser,
   registerUser,
-  updateProfilePic,
   updateUsername,
   updateProfileData,
+  updateProfilePicture,
+  getAllUsers,
 } from "../controllers/users.controllers.js";
 import multer from "multer";
 
@@ -25,11 +26,12 @@ const upload = multer({ storage });
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-router.post("/upload", upload.single("profile_picture"), updateProfilePic);
+router.post("/upload", upload.single("profile_picture"), updateProfilePicture);
 
 router.put("/updateUsername", updateUsername);
 
 router.get("/profile", getUserProfile);
 router.post("/updateProfileData", updateProfileData);
+router.get("/allUsers", getAllUsers);
 
 export default router;
