@@ -2,6 +2,7 @@ import User from "../models/users.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+// Register User
 export const registerUser = async (req, res) => {
   try {
     const { sapId, name, email, password, role } = req.body;
@@ -96,5 +97,22 @@ export const loginUser = async (req, res) => {
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Error logging in", error });
+  }
+};
+
+// User Profile
+
+export const updateProfilePic = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded." });
+    }
+
+    res
+      .status(200)
+      .json({ message: "File uploaded successfully!", file: req.file });
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res.status(500).json({ message: "Server error", error });
   }
 };

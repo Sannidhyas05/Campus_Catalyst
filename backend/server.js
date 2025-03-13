@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import postsRoutes from "./routes/posts.routes.js";
 import userRoutes from "./routes/users.routes.js";
+import path from "path";
 
 dotenv.config();
 
@@ -11,6 +12,11 @@ const app = express();
 app.use(cors()); // user doesn't allow exception
 
 app.use(express.json());
+app.use("/api/users", userRoutes);
+app.use("/posts", postsRoutes);
+
+app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
+
 app.use("/api/users", userRoutes);
 app.use("/posts", postsRoutes);
 
