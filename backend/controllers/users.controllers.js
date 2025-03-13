@@ -5,10 +5,10 @@ import jwt from "jsonwebtoken";
 // Register User
 export const registerUser = async (req, res) => {
   try {
-    const { sapId, name, email, password, role } = req.body;
+    const { sapId, name, email, password, role, username } = req.body;
 
     // Check for required fields
-    if (!sapId || !name || !email || !password || !role) {
+    if (!sapId || !name || !email || !password || !role || !username) {
       return res.status(400).json({
         message:
           "All fields (sapId, name, email, password, role) are required.",
@@ -31,6 +31,7 @@ export const registerUser = async (req, res) => {
       email,
       password,
       role, // Student, Teacher, Admin
+      username,
     });
 
     res.status(201).json({
@@ -139,34 +140,53 @@ export const updateProfilePic = async (req, res) => {
   }
 };
 
-// User Profile
+//Username Update
 
-// export const updateProfile = async (req, res) => {
-//   try {
-//     const { token, ...newUserData } = req.body;
+export const updateUsername = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const token = req.headers.authorization?.split(" ")[1];
 
-//     const user = await User.findOne({ token: token });
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided." });
+    }
 
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found." });
-//     }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
+    const userId = decoded.id;
 
-//     const { username, email } = newUserData;
+    if (!username) {
+      return res.status(400).json({ message: "Username is required." });
+    }
 
-//     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    // Check if username is already taken (excluding the current user)
+    const existingUser = await User.findOne({ username });
 
-//     if (existingUser) {
-//       if (existingUser || existingUser._id.toString() !== user._id.toString()) {
-//         return res
-//           .status(400)
-//           .json({ message: "Username or email already exists." });
-//       }
+    if (existingUser && existingUser._id.toString() !== userId) {
+      return res.status(400).json({ message: "Username already taken." });
+    }
 
-//       Object.assign(user, newUserData);
-//       await user.save();
-//     }
-//   } catch (error) {
-//     console.error("Error updating profile:", error);
-//     res.status(500).json({ message: "Server error", error });
-//   }
-// };
+    // Update username in the database
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { username },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json({
+      message: "Username updated successfully!",
+      user: {
+        id: updatedUser._id,
+        username: updatedUser.username,
+      },
+    });
+  } catch (error) {
+    console.error("Error updating username:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

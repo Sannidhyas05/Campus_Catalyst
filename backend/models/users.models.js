@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema(
       type: String, // URL to profile picture
       default: "",
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      required: true,
+    },
     role: {
       type: String,
       enum: ["Student", "Teacher", "Admin"], // Updated to only three roles

@@ -6,7 +6,8 @@ content-Type: application/json
   "name": "Sannidhya",
   "email": "sannidhya.108008@stu.upes.ac.in",
   "password": "s123456789",
-  "role": "Student"
+  "role": "Student",
+  "username": "sannidhya108008"
 }
 
 ###
@@ -18,3 +19,18 @@ content-Type: application/json
   "email": "sannidhya.108008@stu.upes.ac.in",
   "password": "s123456789"
 }
+
+###
+
+POST http://localhost:9080/api/users/register HTTP/1.1
+content-Type: application/json
+
+{
+  "sapId": "500108279",
+  "name": "Ria",
+  "email": "ria.108279@stu.upes.ac.in",
+  "password": "s12345678",
+  "role": "Student",
+  "username": "ria108279"
+}
+
