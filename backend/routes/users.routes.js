@@ -23,5 +23,6 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 router.post("/upload", upload.single("profile_picture"), updateProfilePic);
+// router.post("/updateProfile", updateProfile);
 
 export default router;

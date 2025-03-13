@@ -15,7 +15,6 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res
@@ -26,7 +25,6 @@ export const registerUser = async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the user
     const newUser = await User.create({
       sapId,
       name,
@@ -100,19 +98,75 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// User Profile
+// User Profile Pictue Upload
 
 export const updateProfilePic = async (req, res) => {
   try {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided." });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
+    const userId = decoded.id;
+
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded." });
     }
 
-    res
-      .status(200)
-      .json({ message: "File uploaded successfully!", file: req.file });
+    const filePath = req.file.path; // Get uploaded file path
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { profilePic: filePath }, // Update profile picture in database
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json({
+      message: "Profile picture updated successfully!",
+      profilePic: user.profilePic,
+    });
   } catch (error) {
-    console.error("Error uploading file:", error);
+    console.error("Error uploading profile picture:", error);
     res.status(500).json({ message: "Server error", error });
   }
 };
+
+// User Profile
+
+// export const updateProfile = async (req, res) => {
+//   try {
+//     const { token, ...newUserData } = req.body;
+
+//     const user = await User.findOne({ token: token });
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found." });
+//     }
+
+//     const { username, email } = newUserData;
+
+//     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+
+//     if (existingUser) {
+//       if (existingUser || existingUser._id.toString() !== user._id.toString()) {
+//         return res
+//           .status(400)
+//           .json({ message: "Username or email already exists." });
+//       }
+
+//       Object.assign(user, newUserData);
+//       await user.save();
+//     }
+//   } catch (error) {
+//     console.error("Error updating profile:", error);
+//     res.status(500).json({ message: "Server error", error });
+//   }
+// };
