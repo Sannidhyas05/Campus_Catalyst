@@ -16,7 +16,7 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }, { username });
     if (existingUser) {
       return res
         .status(400)
@@ -263,7 +263,7 @@ export const updateProfileData = async (req, res) => {
         .json({ message: "Access denied. No token provided." });
     }
 
-    const decoded = jwt.decode(token.replace("Bearer ", ""));
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
     if (!decoded || !decoded.id) {
       return res.status(400).json({ message: "Invalid token." });
     }
@@ -294,10 +294,10 @@ export const getAllUsers = async (req, res) => {
   try {
     const profiles = await Profile.find().populate(
       "user",
-      "sapId name email role username profilePicture"
+      "sapId name email role username profilePicture -password"
     );
     return res.status(200).json(profiles);
   } catch (error) {
-    return res.status(5000).json({ message: "Error fetching users", error });
+    return res.status(500).json({ message: "Error fetching users", error });
   }
 };
