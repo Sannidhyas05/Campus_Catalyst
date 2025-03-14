@@ -9,6 +9,11 @@ import {
   getAllUsers,
 } from "../controllers/users.controllers.js";
 import multer from "multer";
+import {
+  followUser,
+  unfollowUser,
+  getfollowData,
+} from "../controllers/followers.controllers.js";
 
 const router = express.Router();
 
@@ -34,4 +39,7 @@ router.get("/profile", getUserProfile);
 router.post("/updateProfileData", updateProfileData);
 router.get("/allUsers", getAllUsers);
 
+router.post("/follow", followUser);
+router.post("/unfollow", unfollowUser);
+router.get("/getfollowersData", getfollowData);
 export default router;

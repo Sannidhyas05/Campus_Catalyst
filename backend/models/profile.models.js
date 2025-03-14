@@ -14,6 +14,20 @@ const profileSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
     bio: {
       type: String,
       trim: true,

@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
     sapId: {
       type: String,
       required: true,
-      unique: true, // Unique SAP ID for each user
+      unique: true,
     },
     name: {
       type: String,
@@ -48,18 +48,21 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        default: [],
       },
     ],
     following: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        default: [],
       },
     ],
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
+        default: [],
       },
     ],
     teams: [
@@ -72,6 +75,7 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post",
+        default: [],
       },
     ],
   },
