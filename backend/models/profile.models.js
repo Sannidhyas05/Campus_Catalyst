@@ -17,14 +17,14 @@ const profileSchema = new mongoose.Schema(
     followers: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Profile",
         default: [],
       },
     ],
     following: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Profile",
         default: [],
       },
     ],

@@ -263,7 +263,7 @@ export const updateProfileData = async (req, res) => {
         .json({ message: "Access denied. No token provided." });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
+    const decoded = jwt.decode(token, process.env.JWT_SECRET || "secret_key");
     if (!decoded || !decoded.id) {
       return res.status(400).json({ message: "Invalid token." });
     }
@@ -294,7 +294,7 @@ export const getAllUsers = async (req, res) => {
   try {
     const profiles = await Profile.find().populate(
       "user",
-      "sapId name email role username profilePicture -password"
+      "sapId name email role username profilePicture "
     );
     return res.status(200).json(profiles);
   } catch (error) {

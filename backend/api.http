@@ -45,7 +45,7 @@ content-Type: application/json
 
 ###
 GET http://localhost:9080/api/users/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDJlZGY3MDAwMDFmNzMwNzExMzk3YyIsInNhcElkIjoiNTAwMTA4Mjc5Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDE5NzUxMDMsImV4cCI6MTc0MjU3OTkwM30.tsSMvn0sapOZy_Apb0dMchd3DAuGybYDGWIb4EMjVLQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDQ2ZjUxNDUyNDBmYzk2M2E4Yjc5NyIsInNhcElkIjoiNTAwMTA4MDA4Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDE5Nzk0MTksImV4cCI6MTc0MjU4NDIxOX0.oK_9yn3AVSUuJRJkhkk1tQ7cZg_vzyZAvTk91N0tbMQ
 Content-Type: application/json
 
 ###
