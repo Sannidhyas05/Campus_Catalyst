@@ -9,6 +9,9 @@ import path from "path";
 dotenv.config();
 
 const app = express();
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true })); // user doesn't allow exception
 app.use(cors()); // user doesn't allow exception
 
 app.use(express.json());
@@ -18,7 +21,7 @@ app.use("/posts", postsRoutes);
 app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
 app.use("/api/users", userRoutes);
-app.use("/posts", postsRoutes);
+app.use("/api/posts", postsRoutes);
 
 const start = async () => {
   const connectDB = await mongoose.connect(

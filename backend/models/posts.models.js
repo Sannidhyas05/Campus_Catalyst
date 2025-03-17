@@ -7,10 +7,17 @@ const postSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    postType: {
+      type: String,
+      enum: ["content", "project"],
+      required: true,
+    },
     content: {
       type: String,
-      required: true,
       trim: true,
+      required: function () {
+        return this.postType === "content";
+      },
     },
     media: [
       {
@@ -55,7 +62,12 @@ const postSchema = new mongoose.Schema(
       },
     ],
     projectDetails: {
-      title: String,
+      title: {
+        type: String,
+        required: function () {
+          return this.postType === "project";
+        },
+      },
       teamMembers: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -72,7 +84,7 @@ const postSchema = new mongoose.Schema(
         default: "Planning",
       },
     },
-    tags: [String], // Keywords or hashtags
+    tags: [String],
     createdAt: {
       type: Date,
       default: Date.now,
@@ -82,5 +94,4 @@ const postSchema = new mongoose.Schema(
 );
 
 const Post = mongoose.model("Post", postSchema);
-
 export default Post;

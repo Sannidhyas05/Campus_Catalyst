@@ -44,20 +44,6 @@ const userSchema = new mongoose.Schema(
     year: {
       type: Number, // Year of study (for students)
     },
-    // followers: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "User",
-    //     default: [],
-    //   },
-    // ],
-    // following: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "User",
-    //     default: [],
-    //   },
-    // ],
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,
