@@ -143,7 +143,7 @@ export const commentPost = async (req, res) => {
     const comment = {
       userId: userId,
       content: content,
-      //createdAt: new Date(), // Optional: Add timestamp manually
+      createdAt: new Date(),
     };
 
     post.comments.push(comment);
