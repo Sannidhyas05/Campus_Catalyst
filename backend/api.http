@@ -44,6 +44,30 @@ content-Type: application/json
 }
 
 ###
+
+POST http://localhost:9080/api/users/register HTTP/1.1
+content-Type: application/json
+
+{
+  "sapId": "500106942",
+  "name": "Mahika",
+  "email": "mahika.106942@stu.upes.ac.in",
+  "password": "m123456789",
+  "role": "Student",
+  "username": "mahika.6942"
+}
+
+###
+POST http://localhost:9080/api/users/login HTTP/1.1
+content-Type: application/json
+
+{
+    "email": "mahika.106942@stu.upes.ac.in",
+    "password": "m123456789"
+}
+
+
+###
 GET http://localhost:9080/api/users/profile HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDQ2ZjUxNDUyNDBmYzk2M2E4Yjc5NyIsInNhcElkIjoiNTAwMTA4MDA4Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDE5Nzk0MTksImV4cCI6MTc0MjU4NDIxOX0.oK_9yn3AVSUuJRJkhkk1tQ7cZg_vzyZAvTk91N0tbMQ
 Content-Type: application/json

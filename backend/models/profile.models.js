@@ -33,10 +33,10 @@ const profileSchema = new mongoose.Schema(
       trim: true,
     },
     profilePic: {
-      type: String, // Store URL of the profile picture
+      type: String,
     },
     skills: {
-      type: [String], // Array of skills
+      type: [String],
     },
     socialLinks: {
       linkedin: { type: String, trim: true },

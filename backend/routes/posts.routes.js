@@ -1,6 +1,14 @@
 import express from "express";
 import multer from "multer";
-import { createPost, activeCheck } from "../controllers/posts.controller.js";
+import {
+  createPost,
+  activeCheck,
+  likePost,
+  commentPost,
+  sharePost,
+  getPosts,
+  deletePost,
+} from "../controllers/posts.controller.js";
 
 const router = express.Router();
 
@@ -16,5 +24,10 @@ const upload = multer({ storage });
 
 router.get("/", activeCheck);
 router.post("/create", upload.single("media"), createPost);
+router.post("/like", likePost);
+router.post("/comment", commentPost);
+router.post("/share", sharePost);
+router.get("/getPosts", getPosts);
+router.post("/delete", deletePost);
 
 export default router;

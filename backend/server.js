@@ -11,12 +11,8 @@ dotenv.config();
 const app = express();
 
 app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb", extended: true })); // user doesn't allow exception
-app.use(cors()); // user doesn't allow exception
-
-app.use(express.json());
-app.use("/api/users", userRoutes);
-app.use("/posts", postsRoutes);
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cors());
 
 app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
@@ -24,12 +20,18 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postsRoutes);
 
 const start = async () => {
-  const connectDB = await mongoose.connect(
-    "mongodb+srv://sannidhya:Sannidhya0501@campuscatalyst.rt26u.mongodb.net/?retryWrites=true&w=majority&appName=CampusCatalyst"
-  );
+  try {
+    await mongoose.connect(
+      "mongodb+srv://sannidhya:Sannidhya0501@campuscatalyst.rt26u.mongodb.net/campus_catalyst?retryWrites=true&w=majority&appName=CampusCatalyst"
+    );
+    console.log("Connected to MongoDB successfully!");
 
-  app.listen(9080, () => {
-    console.log("Server is running on port 9080");
-  });
+    app.listen(9080, () => {
+      console.log("Server is running on port 9080");
+    });
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error.message);
+    process.exit(1);
+  }
 };
 start();
