@@ -1,0 +1,43 @@
+.container{
+    font-family: 'Poppins', sans-serif;
+    padding: 1.2rem;
+}
+
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    padding-inline: 2rem;
+    height: 80vh;
+}
+
+.mainContainer_left{
+    flex: 0.5;
+}
+
+.mainContainer_right{
+    flex: 0.5;
+}
+
+.mainContainer_left > p:nth-child(1){
+    font-size: 3rem;
+    font-weight: 600;
+    color: #000000;
+}
+.mainContainer_left > p:nth-child(2){
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #000000bc;
+}
+.mainContainer_left > div.buttonjoin{
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.8rem;
+    font-size: 1.5rem;
+    background-color: rgb(6, 215, 20);
+    padding-inline: 1.5rem;
+    padding-block: 0.2rem;
+    border-radius: 0.5rem;
+}

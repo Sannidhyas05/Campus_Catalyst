@@ -1,8 +1,10 @@
-const { default: axios } = require("axios");
+import axios from "axios";
 
 
 
-const clientServer = axios.create({
+export const clientServer = axios.create({
   baseURL: "http://localhost:9080",
-  withCredentials: true,
+  headers: {
+    "Content-type": "application/json"
+  }
 });

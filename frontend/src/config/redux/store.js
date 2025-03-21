@@ -1,13 +1,18 @@
+/*
+ *
+ * Steps for state management
+ *
+ * 1. submit action
+ * 2. handle actiom in its reducer
+ * 3. handle here -> reducer
+ *
+ */
+
 import { configureStore } from "@reduxjs/toolkit";
-
-//steps for state management
-
-// 1. submit actions
-// 2. handle actions in reducers
-// 3. register reducers in store
+import authReducer from "../redux/reducer/authReducer/index";
 
 export const store = configureStore({
   reducer: {
-    //reducers
+    auth: authReducer,
   },
 });
