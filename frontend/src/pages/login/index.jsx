@@ -1,5 +1,5 @@
 import UserLayout from "@/Layout/UserLayout";
-import React from "react";
+import React, { use } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -8,12 +8,13 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/config/redux/action/authAction";
-import { Faster_One } from "next/font/google";
+import { loginUser } from "@/config/redux/action/authAction";
+import { emptyMessage } from "../../config/redux/reducer/authReducer/index";
 
 function LoginComponent() {
   const authState = useSelector((state) => state.auth);
   const router = useRouter();
-  const [isLoginMethod, setIsLoginMethod] = useState(true);
+  const [isLoginMethod, setIsLoginMethod] = useState(false);
   const [selectedRole, setSelectedRole] = useState("Select Role");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -31,6 +32,17 @@ function LoginComponent() {
       router.push("/dashboard");
     }
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("dashboard");
+    }
+  });
+
+  useEffect(() => {
+    dispatchEvent(emptyMessage());
+  }, [isLoginMethod]);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -54,10 +66,19 @@ function LoginComponent() {
       })
     );
   };
+  const handleLogin = () => {
+    console.log("Logging in");
+    dispatchEvent(
+      loginUser({
+        email: email,
+        password: password,
+      })
+    );
+  };
 
   const handleRoleSelect = (selectedRole) => {
     setSelectedRole(selectedRole);
-    setRole(selectedRole); // ✅ Ensure role is updated
+    setRole(selectedRole);
     setDropdownOpen(false);
   };
 
@@ -111,7 +132,7 @@ function LoginComponent() {
                   className={styles.dropbtn}
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
-                  {role ? role : "Select Role"} {/* Show selected role */}
+                  {role ? role : "Select Role"}
                 </button>
                 {dropdownOpen && (
                   <div className={styles.dropdownContent}>
@@ -129,7 +150,7 @@ function LoginComponent() {
             <div
               onClick={() => {
                 if (isLoginMethod) {
-                  router.push("/login");
+                  handleLogin();
                 } else {
                   handleRegister();
                 }
