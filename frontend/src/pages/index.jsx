@@ -24,13 +24,21 @@ export default function Home() {
           <div className={styles.mainContainer_left}>
             <p>Campus Catalyst</p>
             <p>A student-mentor Workflow</p>
-            <div onClick={() => router.push("/login")} className={styles.buttonjoin}>
+            <div
+              onClick={() => router.push("/login")}
+              className={styles.buttonjoin}
+            >
               <p>LOGIN HERE</p>
             </div>
           </div>
 
           <div className={styles.mainContainer_right}>
-            <Image src="/images/homepage.png" width={920} height={320} alt="Homepage Image" />
+            <Image
+              src="/images/homepage.png"
+              width={920}
+              height={320}
+              alt="Homepage Image"
+            />
           </div>
         </div>
       </div>

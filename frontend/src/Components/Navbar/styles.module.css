@@ -2,3 +2,27 @@
    padding: 1.2rem;
     font-family: 'Poppins', sans-serif;
 }
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navBarOptionContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.buttonJoin{
+    background-color: rgba(255, 136, 0, 0.648);
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}

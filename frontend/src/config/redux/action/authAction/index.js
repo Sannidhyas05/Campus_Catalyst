@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { clientServer } from "../../../index.jsx";
 
 export const loginUser = createAsyncThunk(
-  "user/login",
+  "/api/user/login",
   async (user, thunkAPI) => {
     try {
       const response = await clientServer.post("/login", {
@@ -20,32 +20,26 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem("token", data.token);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data || { message: error.message || "Login failed" }
-      );
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const registerUser = createAsyncThunk(
-  "user/register",
+  "/api/users/register",
   async (user, thunkAPI) => {
     try {
-      const response = await clientServer.post("/register", user);
-
-      const data = response.data;
-      if (!data?.token) {
-        return thunkAPI.rejectWithValue({
-          message: "Token not provided by server",
-        });
-      }
-
-      localStorage.setItem("token", data.token);
-      return thunkAPI.fulfillWithValue(data);
+      const response = await clientServer.post("/api/users/register", {
+        sapId: user.sapId,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        role: user.role,
+      });
+      return thunkAPI.fulfillWithValue({ message: response.data.message });
     } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data || { message: error.message || "Register failed" }
-      );
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );

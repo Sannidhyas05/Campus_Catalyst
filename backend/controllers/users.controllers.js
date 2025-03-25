@@ -9,18 +9,48 @@ export const registerUser = async (req, res) => {
     const { sapId, name, email, password, role, username } = req.body;
 
     // Check for required fields
-    if (!sapId || !name || !email || !password || !role || !username) {
+    if (!sapId) {
       return res.status(400).json({
-        message:
-          "All fields (sapId, name, email, password, role) are required.",
+        message: "SAP ID is required.",
+      });
+    }
+    if (!name) {
+      return res.status(400).json({
+        message: "Name is required.",
+      });
+    }
+    if (!username) {
+      return res.status(400).json({
+        message: "Username is required.",
       });
     }
 
-    const existingUser = await User.findOne({ email }, { username });
+    if (!email) {
+      return res.status(400).json({
+        message: " Email is required.",
+      });
+    }
+    if (!password) {
+      return res.status(400).json({
+        message: "Password is required.",
+      });
+    }
+    if (!role) {
+      return res.status(400).json({
+        message: "Role is required.",
+      });
+    }
+
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "User already exists with this email." });
+      if (existingUser.email === email) {
+        return res
+          .status(400)
+          .json({ message: "User already exists with this email." });
+      } else if (existingUser.username === username) {
+        return res.status(400).json({ message: "Username already taken." });
+      }
     }
 
     // Hash the password
