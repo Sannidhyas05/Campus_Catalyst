@@ -1,26 +1,32 @@
+import { getAboutUser, getAllUsers } from "@/config/redux/action/authAction";
 import { getPosts } from "@/config/redux/action/postAction";
+import DashboardLayout from "../../Layout/DashboardLayout/index";
+import UserLayout from "@/Layout/UserLayout";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function dashboard() {
   const router = useRouter();
-  const [isTokenThere, setTokenThere] = useState(false);
 
   const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (localStorage.getItem("token") == null) {
-      router.push("/login");
-    }
-    setTokenThere(true);
-  });
-
-  useEffect(() => {
-    if (isTokenThere) {
+    if (authState.isTokenThere) {
       dispatch(getPosts());
+      dispatch(getAboutUser({ token: localStorage.getItem("token") }));
     }
-  }, [isTokenThere]);
+    if (!authState.allProfilesFetched) {
+      dispatch(getAllUsers());
+    }
+  }, [authState.isTokenThere]);
 
-  return <div>dashboard</div>;
+  return (
+    <UserLayout>
+      <DashboardLayout>
+        <h1>Dashboard</h1>
+      </DashboardLayout>
+    </UserLayout>
+  );
 }

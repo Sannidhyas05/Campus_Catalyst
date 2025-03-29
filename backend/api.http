@@ -69,7 +69,7 @@ content-Type: application/json
 
 ###
 GET http://localhost:9080/api/users/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDQ2ZjUxNDUyNDBmYzk2M2E4Yjc5NyIsInNhcElkIjoiNTAwMTA4MDA4Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDE5Nzk0MTksImV4cCI6MTc0MjU4NDIxOX0.oK_9yn3AVSUuJRJkhkk1tQ7cZg_vzyZAvTk91N0tbMQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTE1MWVmY2UwNGFhOTk5ZDAxMzk0ZiIsInNhcElkIjoiNTAwMTA4MDA4Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDMwNzI4NDgsImV4cCI6MTc0MzY3NzY0OH0.OPV4DPlWdzisXp1dwL9xdF9L2evP4nFuADvPNNE2Vtk
 Content-Type: application/json
 
 ###
@@ -82,3 +82,7 @@ content-Type: application/json
   "email": "shubhanan.107856@stu.upes.ac.in",
   "password": "test1234"
 }
+
+###
+
+GET  http://localhost:9080/api/users/allUsers HTTP/1.1

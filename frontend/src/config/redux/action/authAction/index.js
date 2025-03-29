@@ -43,3 +43,32 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const getAboutUser = createAsyncThunk(
+  "/api/users/profile",
+  async (user, thunkAPI) => {
+    try {
+      const response = await clientServer.get("/api/users/profile", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getAllUsers = createAsyncThunk(
+  "/api/users/allUsers",
+
+  async (_, thunkAPI) => {
+    try {
+      const response = await clientServer.get("/api/users/allUsers");
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);

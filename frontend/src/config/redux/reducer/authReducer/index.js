@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "../../action/authAction/index";
+import {
+  loginUser,
+  registerUser,
+  getAboutUser,
+  getAllUsers,
+} from "../../action/authAction/index";
 
 const initialState = {
   user: [],
@@ -7,10 +12,13 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   message: "",
+  isTokenThere: false,
   profilefetched: false,
   followers: [],
   following: [],
   profile: [],
+  allProfilesFetched: false,
+  allUsers: [],
 };
 
 const authSlice = createSlice({
@@ -24,6 +32,12 @@ const authSlice = createSlice({
 
     emptyMessage: (state) => {
       state.message = "";
+    },
+    setTokenIsThere: (state) => {
+      state.isTokenThere = true;
+    },
+    setTokenIsNotThere: (state) => {
+      state.isTokenThere = false;
     },
   },
 
@@ -41,6 +55,7 @@ const authSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.message = { message: "Login Successful!" };
+        state.profilefetched = true;
         state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -68,9 +83,39 @@ const authSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload;
+      })
+
+      // Get User Profile
+
+      .addCase(getAboutUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.profilefetched = true;
+        state.user = action.payload.user;
+      })
+      .addCase(getAboutUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.profilefetched = false;
+        state.message = action.payload?.message || "Failed to fetch user data";
+      })
+
+      // Get all Profiles
+
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        if (Array.isArray(action.payload)) {
+          state.allUsers = action.payload;
+        } else {
+          state.allUsers = [];
+        }
+
+        state.allProfilesFetched = true;
       });
   },
 });
 
-export const { reset, emptyMessage } = authSlice.actions;
+export const { reset, emptyMessage, setTokenIsNotThere, setTokenIsThere } =
+  authSlice.actions;
 export default authSlice.reducer;
