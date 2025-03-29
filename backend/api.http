@@ -5,7 +5,7 @@ content-Type: application/json
   "sapId": "500108008",
   "name": "Sannidhya",
   "email": "sannidhya.108008@stu.upes.ac.in",
-  "password": "s123456789",
+  "password": "s",
   "role": "Student",
   "username": "sannidhya108008"
 }
@@ -17,7 +17,7 @@ content-Type: application/json
 
 {
   "email": "sannidhya.108008@stu.upes.ac.in",
-  "password": "s123456789"
+  "password": "s"
 }
 
 ###
@@ -69,7 +69,7 @@ content-Type: application/json
 
 ###
 GET http://localhost:9080/api/users/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTE1MWVmY2UwNGFhOTk5ZDAxMzk0ZiIsInNhcElkIjoiNTAwMTA4MDA4Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDMwNzI4NDgsImV4cCI6MTc0MzY3NzY0OH0.OPV4DPlWdzisXp1dwL9xdF9L2evP4nFuADvPNNE2Vtk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTdlNzY3MzEzZjQxOWI5ZDM5OTg4NiIsInNhcElkIjoiNTAwMTA4MDA4Iiwicm9sZSI6IlN0dWRlbnQiLCJpYXQiOjE3NDMyNTE2MjYsImV4cCI6MTc0Mzg1NjQyNn0.Zzjvy8hXZZE8oPEOON4ChonR1pjFAvq3X9CQ_DqQfLQ
 Content-Type: application/json
 
 ###

@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    profilePic: {
-      type: String, // URL to profile picture
-      default: "",
-    },
+    // profilePicture: {
+    //   type: String, // URL to profile picture
+    //   default: "",
+    // },
     username: {
       type: String,
       required: true,

@@ -32,8 +32,9 @@ const profileSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    profilePic: {
+    profilePicture: {
       type: String,
+      default: "",
     },
     skills: {
       type: [String],

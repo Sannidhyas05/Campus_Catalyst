@@ -164,28 +164,28 @@ export const updateProfilePicture = async (req, res) => {
         .json({ message: "Unauthorized: No token provided." });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
+    const decoded = jwt.decode(token, process.env.JWT_SECRET || "secret_key");
     const userId = decoded.id;
 
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded." });
     }
 
-    const filePath = req.file.path; // Get uploaded file path
+    const filePath = req.file.path;
 
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { profilePic: filePath }, // Update profile picture in database
+    const profile = await Profile.findOneAndUpdate(
+      { user: userId },
+      { profilePicture: filePath },
       { new: true }
     );
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found." });
     }
 
     return res.status(200).json({
       message: "Profile picture updated successfully!",
-      profilePic: user.profilePic,
+      profilePicture: profile.profilePicture,
     });
   } catch (error) {
     console.error("Error uploading profile picture:", error);
@@ -206,7 +206,7 @@ export const updateUsername = async (req, res) => {
         .json({ message: "Unauthorized: No token provided." });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
+    const decoded = jwt.decode(token, process.env.JWT_SECRET || "secret_key");
     const userId = decoded.id;
 
     if (!username) {
@@ -257,9 +257,7 @@ export const getUserProfile = async (req, res) => {
         .json({ message: "Access denied. No token provided." });
     }
 
-    // Decode token without verification
     const decoded = jwt.decode(token.replace("Bearer ", ""));
-
     if (!decoded || !decoded.id) {
       return res.status(400).json({ message: "Invalid token." });
     }
@@ -268,14 +266,16 @@ export const getUserProfile = async (req, res) => {
 
     const profile = await Profile.findOne({ user: userId }).populate(
       "user",
-      "sapId name email role username"
+      "sapId name email role username profilePicture"
     );
 
     if (!profile) {
       return res.status(404).json({ message: "Profile not found." });
     }
 
-    res.status(200).json(profile);
+    const profileData = profile.toObject();
+    profileData.profilePicture = profile.profilePicture || "hell";
+    res.status(200).json(profileData);
   } catch (error) {
     console.error("Error fetching user profile:", error);
     res.status(500).json({ message: "Error retrieving profile", error });

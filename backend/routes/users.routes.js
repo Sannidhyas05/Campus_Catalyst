@@ -31,7 +31,11 @@ const upload = multer({ storage });
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
-router.post("/upload", upload.single("profile_picture"), updateProfilePicture);
+router.post(
+  "/updateProfilePicture",
+  upload.single("profile_picture"),
+  updateProfilePicture
+);
 
 router.put("/updateUsername", updateUsername);
 
