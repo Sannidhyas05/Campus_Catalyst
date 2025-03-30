@@ -7,7 +7,7 @@ import {
 } from "../../action/authAction/index";
 
 const initialState = {
-  user: [],
+  user: undefined,
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -16,7 +16,7 @@ const initialState = {
   profilefetched: false,
   followers: [],
   following: [],
-  profile: [],
+  profile: {},
   allProfilesFetched: false,
   allUsers: [],
 };
@@ -92,6 +92,7 @@ const authSlice = createSlice({
         state.isError = false;
         state.profilefetched = true;
         state.user = action.payload.user;
+        state.profile = action.payload || {};
       })
       .addCase(getAboutUser.rejected, (state, action) => {
         state.isLoading = false;

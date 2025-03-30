@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import postsRoutes from "./routes/posts.routes.js";
 import userRoutes from "./routes/users.routes.js";
+import projectRoutes from "./routes/projects.routes.js";
 import path from "path";
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postsRoutes);
+app.use("/api/projects", projectRoutes);
 
 const start = async () => {
   try {

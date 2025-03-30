@@ -1,0 +1,135 @@
+
+.scrollComponent {
+    overflow-y: auto;
+    max-height: 80vh;
+    padding: 12px;
+}
+
+
+.createPostContainer {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.createPostContainer:hover {
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+}
+
+.createPostContainer img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 14px;
+    object-fit: cover;
+    border: 2px solid snow;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.createPostContainer img:hover {
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.6);
+}
+
+
+.createPostContainer textarea {
+    flex: 1;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    outline: none;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease-in-out;
+    min-height: fit-content;
+    
+}
+
+.createPostContainer textarea:focus {
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+}
+
+.fabContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0.5rem ;
+    padding-right: 0.1rem;
+    max-width: 100px;
+}
+
+
+.fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    max-width: 40px;
+}
+
+.fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px #007bff;
+}
+
+.uploadButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 8px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 8px; 
+    max-width: 80px;
+}
+
+.uploadButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.uploadButton:active {
+    background-color: #004494;
+    transform: scale(0.98);
+}
+
+
+.toggleContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .toggleContainer button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .toggleContainer .activeButton {
+    background: #007bff;
+    color: white;
+  }
+  

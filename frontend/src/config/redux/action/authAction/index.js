@@ -53,6 +53,7 @@ export const getAboutUser = createAsyncThunk(
           Authorization: `Bearer ${user.token}`,
         },
       });
+      console.log("Fetched Profile Data:", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

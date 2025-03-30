@@ -68,8 +68,8 @@ export const registerUser = async (req, res) => {
 
     const newProfile = await Profile.create({
       user: newUser._id, // Reference user ID
-      username, // Set username
-      bio: "", // Default empty bio
+      username,
+      bio: "",
       skills: [],
       socialLinks: {
         linkedin: "",

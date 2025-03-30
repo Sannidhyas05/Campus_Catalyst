@@ -9,6 +9,7 @@ const initialState = {
   message: "",
   comments: [],
   postId: "",
+  postFetched: false,
 };
 
 const postSlice = createSlice({
@@ -25,20 +26,22 @@ const postSlice = createSlice({
     builder
       .addCase(getPosts.pending, (state) => {
         state.isLoading = true;
-        state.message = "fetching Posts";
+        state.message = "Fetching Posts...";
       })
       .addCase(getPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.postFetched = true;
-        state.posts = action.payload.posts;
+        state.posts = action.payload.posts || [];
+        state.message = "Posts fetched successfully!";
       })
       .addCase(getPosts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload || "Failed to fetch posts.";
       });
   },
 });
 
+export const { reset, resetPostId } = postSlice.actions;
 export default postSlice.reducer;

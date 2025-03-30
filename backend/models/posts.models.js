@@ -59,29 +59,6 @@ const postSchema = new mongoose.Schema(
         },
       },
     ],
-    projectDetails: {
-      title: {
-        type: String,
-        required: function () {
-          return this.postType === "project";
-        },
-      },
-      teamMembers: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-        },
-      ],
-      mentorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-      progress: {
-        type: String,
-        enum: ["Planning", "In Progress", "Completed"],
-        default: "Planning",
-      },
-    },
     tags: [String],
     createdAt: {
       type: Date,
