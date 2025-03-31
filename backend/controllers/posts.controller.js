@@ -11,6 +11,10 @@ export const activeCheck = async (req, res) => {
 // Create a post
 export const createPost = async (req, res) => {
   try {
+    if (!req.body.body?.trim() && !req.file) {
+      return res.status(400).json({ message: "Content or media is required" });
+    }
+
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ message: "Unauthorized" });
 
@@ -20,24 +24,18 @@ export const createPost = async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const { content, tags } = req.body || {};
-    const media = req.files
-      ? req.files.map((file) => ({
-          url: file.path,
-          type: file.mimetype.split("/")[0],
-        }))
-      : [];
-
-    if (!content && media.length === 0) {
-      return res.status(400).json({ message: "Content or media is required" });
-    }
+    const media = req.file
+      ? {
+          url: `/uploads/${req.file.filename}`,
+          type: req.file.mimetype.split("/")[0],
+        }
+      : null;
 
     const post = new Post({
       userId,
       postType: "content",
-      content: content || "",
-      media,
-      tags: tags || [],
+      content: req.body.body || "",
+      media: media ? [media] : [],
     });
 
     await post.save();
