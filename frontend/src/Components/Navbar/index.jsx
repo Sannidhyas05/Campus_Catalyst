@@ -3,6 +3,7 @@ import styles from "../Navbar/styles.module.css";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "@/config/redux/reducer/authReducer";
+import { all } from "axios";
 
 export default function NavBarComponent() {
   const router = useRouter();
@@ -19,7 +20,6 @@ export default function NavBarComponent() {
     <div className={styles.container}>
       <nav className={styles.navBar}>
         <h1
-          style={{ cursor: "pointer" }}
           onClick={() => {
             router.push("/");
           }}
@@ -32,7 +32,7 @@ export default function NavBarComponent() {
             <div style={{ display: "flex", gap: "1.2rem" }}>
               <p>Hey, {authState.user.name}</p>
               <div style={{ fontWeight: "bold", cursor: "pointer" }}>
-                <p>Profile</p>
+                <p> {authState.user.role} Profile</p>
               </div>
               <div style={{ fontWeight: "bold", cursor: "pointer" }}>
                 <p onClick={handleLogout}>Log Out</p>

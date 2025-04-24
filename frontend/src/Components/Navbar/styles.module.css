@@ -1,6 +1,8 @@
 .container{
    padding: 1.2rem;
     font-family: 'Poppins', sans-serif;
+    color: rgb(20, 121, 161);
+    background-color: rgb(255, 255, 255);
 }
 
 .navBar{
@@ -9,6 +11,16 @@
     align-items: center;
     font-family: 'Poppins', sans-serif;
 }
+.navBar h1 {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .navBar h1:hover {
+    color:rgba(0, 50, 150, 0.9); 
+    transform: scale(1.05) translateY(-2px);
+  }
+  
 
 .navBarOptionContainer{
     display: flex;

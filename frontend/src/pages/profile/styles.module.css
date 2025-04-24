@@ -1,0 +1,77 @@
+
+.profileContainer {
+    padding: 20px;
+  }
+  
+  .profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .profileImage {
+    width: 140px;
+    height: 140px;
+    border-radius: 100px;
+    object-fit: cover;
+    border: 3px solid #888;
+  }
+  
+  .userInfo {
+    flex: 1;
+  }
+  
+  .socialLinks a {
+    margin-right: 15px;
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  .stats {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .extraInfo {
+    margin-top: 40px;
+  }
+  
+  .extraInfo h3 {
+    margin-bottom: 5px;
+  }
+  
+  .extraInfo ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .extraInfo li {
+    padding: 3px 0;
+  }
+  
+  .postsGridContainer {
+    margin-top: 20px;
+  }
+  
+  .postsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .postItem {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .postImage {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  

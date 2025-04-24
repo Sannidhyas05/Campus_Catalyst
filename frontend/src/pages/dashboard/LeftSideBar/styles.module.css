@@ -1,0 +1,30 @@
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0.5rem;
+  color: #374151;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  gap: 1rem;
+}
+
+.navItem:hover {
+  background-color: skyblue;
+  color: #111827;
+  transform: translateX(4px);
+}
+
+.icon {
+  font-size: 1.25rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.navItem:hover .icon {
+  color: #1f2937;
+}

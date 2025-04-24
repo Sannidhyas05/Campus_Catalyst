@@ -4,16 +4,10 @@ import { BASE_URL, clientServer } from "@/config";
 
 export const getPosts = createAsyncThunk(
   "posts/getPosts",
-  async (_, { rejectWithValue }) => {
+  async (_, thunkAPI) => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await clientServer.get(
-        `${BASE_URL}/api/posts/getPosts`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      return response.data;
+      const response = await clientServer.get("/api/posts/getPosts");
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return rejectWithValue(error.response?.data || "Failed to fetch posts");
     }

@@ -274,7 +274,7 @@ export const getUserProfile = async (req, res) => {
     }
 
     const profileData = profile.toObject();
-    profileData.profilePicture = profile.profilePicture || "hell";
+    profileData.profilePicture = profile.profilePicture || "no profile";
     res.status(200).json(profileData);
   } catch (error) {
     console.error("Error fetching user profile:", error);

@@ -29,12 +29,14 @@ const postSlice = createSlice({
         state.message = "Fetching Posts...";
       })
       .addCase(getPosts.fulfilled, (state, action) => {
+        console.log("Redux Received Posts:", action.payload);
         state.isLoading = false;
         state.isError = false;
         state.postFetched = true;
-        state.posts = action.payload.posts || [];
+        state.posts = action.payload?.posts || [];
         state.message = "Posts fetched successfully!";
       })
+
       .addCase(getPosts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;

@@ -3,6 +3,10 @@ import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema(
   {
+    profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Profile",
+    },
     sapId: {
       type: String,
       required: true,
@@ -23,10 +27,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // profilePicture: {
-    //   type: String, // URL to profile picture
-    //   default: "",
-    // },
     username: {
       type: String,
       required: true,

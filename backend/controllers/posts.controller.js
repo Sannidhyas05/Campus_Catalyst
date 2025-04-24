@@ -11,7 +11,7 @@ export const activeCheck = async (req, res) => {
 // Create a post
 export const createPost = async (req, res) => {
   try {
-    if (!req.body.body?.trim() && !req.file) {
+    if (!req.body.content?.trim() && !req.file) {
       return res.status(400).json({ message: "Content or media is required" });
     }
 
@@ -34,7 +34,7 @@ export const createPost = async (req, res) => {
     const post = new Post({
       userId,
       postType: "content",
-      content: req.body.body || "",
+      content: req.body.content || "",
       media: media ? [media] : [],
     });
 
@@ -169,7 +169,15 @@ export const sharePost = async (req, res) => {
 export const getPosts = async (req, res) => {
   try {
     const posts = await Post.find()
-      .populate("userId", "name email profilePicture")
+      .populate({
+        path: "userId",
+        select: "username profile",
+        populate: {
+          path: "profile",
+          model: "Profile", // optional if schema ref is set correctly
+          select: "profilePicture",
+        },
+      })
       .sort({ createdAt: -1 });
 
     return res.status(200).json({ posts });

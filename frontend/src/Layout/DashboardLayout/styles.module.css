@@ -1,43 +1,90 @@
-.homeContainer {
-    display: flex;
-    
-}
-
-.homeContainer > div:nth-child(odd){
-    flex: 0.2;
-}
-
-.homeContainer > div:nth-child(even){
-    flex: 0.6;
-}
-
-.homeLeftContainer{
+.Container {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    align-items: start ;
-}
+    height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 4px 8px 0 skyblue;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f3f4f6;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+  }
 
-.sideBarOption{
+
+  .homeContainer {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px 0 skyblue;
+  }
+  
+  
+  .homeContainer__leftBar {
+    width: 18rem;
+    min-width: 16rem;
+    padding: 2rem 1rem;
+    border-right: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.03);
+  }
+  
+
+  .navItem {
     display: flex;
     align-items: center;
     font-size: 1rem;
     gap: 0.5rem;
     min-width: 80%;
-    margin-left: 1.5rem ;
-    margin-top: 0 auto;
-    margin-bottom: 0 auto;
-    margin-right: 0 auto;
+    margin-left: 1.5rem;
     cursor: pointer;
-    transition: all 0.2s;
-}
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .navItem:hover {
+    transform: scale(1.08);
+  }
+  
 
-.sideBarOption > svg{
+  .icon {
     height: 1.4em;
     min-width: fit-content;
-}
+  }
+  
 
-
-.sideBarOption:hover{
-    transform: scale(1.08);
-}
+  .feedContainer {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px 0 skyblue;
+  }
+  
+  .extraContainer {
+    width: 20rem;
+    min-width: 15rem;
+    padding: 2rem 1rem;
+    border-left: 1px solid #e5e7eb;
+  }
+  
+  
+  .extraContainer_profiles {
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+    color: #333;
+    border-bottom: 1px solid #eee;
+  }
+  

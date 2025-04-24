@@ -4,7 +4,7 @@
  *
  * 1. submit action
  * 2. handle actiom in its reducer
- * 3. handle here -> reducer
+ * 3. handle here -> reducer(register)
  *
  */
 
