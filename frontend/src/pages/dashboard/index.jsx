@@ -33,8 +33,10 @@ export default function Dashboard() {
   return (
     <UserLayout>
       <DashboardLayout>
-        <div className="homeFeedContainer">
-          <FeedContainer />
+        <div className={styles.homeFeedContainer}>
+          <div className={styles.feedContent}>
+            <FeedContainer />
+          </div>
         </div>
       </DashboardLayout>
     </UserLayout>

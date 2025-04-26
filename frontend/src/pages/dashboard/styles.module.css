@@ -1,0 +1,14 @@
+.homeFeedContainer {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  /* Optional: If you want to make FeedContainer narrower inside */
+  .feedContent {
+    width: 100%;
+    max-width: 600px;
+  }
+  

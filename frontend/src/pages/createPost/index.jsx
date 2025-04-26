@@ -23,11 +23,12 @@ export default function CreatePosts() {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.content || !formData.media)
-      return alert("can't create post without content or media");
+
+    if (!formData.content && !selectedFile) {
+      return alert("Can't create an empty post! Add content or an image.");
+    }
 
     const postData = new FormData();
     postData.append("content", formData.content);

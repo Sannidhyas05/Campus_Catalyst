@@ -15,7 +15,7 @@ export default function FeedPostCard({ post }) {
     ? `${BASE_URL}/${profile?.profilePicture.replace(/\\/g, "/")}`
     : `${BASE_URL}/uploads/default.jpg`;
 
-  console.log("post profile", profile?._id);
+  console.log("post profile", post.media);
 
   const { media, content, userId, createdAt } = post;
 
@@ -28,23 +28,20 @@ export default function FeedPostCard({ post }) {
           alt="User Avatar"
         />
         <div className={styles.userInfo}>
-          <div>
-            @{userId?.username || "Unknown User"}{" "}
-            <p style={{ fontSize: "10px", color: "gray" }}>
-              ~{new Date(createdAt).toLocaleDateString()}
-            </p>
-          </div>
+          <span>@{userId?.username || "Unknown User"}</span>
+          <p>~{new Date(createdAt).toLocaleDateString()}</p>
         </div>
       </div>
+
       <div className={styles.postContent}>
         <p>{content}</p>
-        {media && (
+        {Array.isArray(media) && media.length > 0 && (
           <img
             className={styles.postImage}
-            src={`${BASE_URL}${media}`}
+            src={`${BASE_URL}${media[0].url}`}
             alt="Post Media"
             onError={(e) => {
-              "no image";
+              e.target.style.display = "none";
             }}
           />
         )}

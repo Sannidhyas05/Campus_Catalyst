@@ -1,4 +1,4 @@
-.Container {
+   .Container {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -6,8 +6,11 @@
     background-color: #ffffff;
     color: #000000;
     box-shadow: 0 4px 8px 0 skyblue;
+    overflow: hidden; /* Important to prevent layout breaking */
   }
+  
   .topbar {
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,8 +19,7 @@
     font-weight: 600;
     border-bottom: 1px solid #e5e7eb;
   }
-
-
+  
   .homeContainer {
     display: flex;
     flex: 1;
@@ -25,9 +27,9 @@
     max-width: 1440px;
     margin: 0 auto;
     box-sizing: border-box;
+    overflow: hidden; 
     box-shadow: 0 4px 8px 0 skyblue;
   }
-  
   
   .homeContainer__leftBar {
     width: 18rem;
@@ -38,10 +40,28 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 8px 8px 0 skyblue;
+    position: sticky;
+    overflow-y: auto;
   }
   
-
+  .feedContainer {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+  
+  .extraContainer {
+    width: 20rem;
+    min-width: 15rem;
+    padding: 2rem 1rem;
+    border-left: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    position: sticky;
+    overflow-y: auto;
+    box-shadow: 0 8px 8px 0 skyblue;
+  }
+  
   .navItem {
     display: flex;
     align-items: center;
@@ -59,27 +79,10 @@
     transform: scale(1.08);
   }
   
-
   .icon {
     height: 1.4em;
     min-width: fit-content;
   }
-  
-
-  .feedContainer {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    box-shadow: 0 4px 8px 0 skyblue;
-  }
-  
-  .extraContainer {
-    width: 20rem;
-    min-width: 15rem;
-    padding: 2rem 1rem;
-    border-left: 1px solid #e5e7eb;
-  }
-  
   
   .extraContainer_profiles {
     padding: 0.4rem 0;
