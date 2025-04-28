@@ -81,6 +81,9 @@ export const registerUser = async (req, res) => {
     });
     await newProfile.save();
 
+    newUser.profile = newProfile._id;
+    await newUser.save();
+
     return res.status(201).json({
       message: "User registered successfully!",
       user: {

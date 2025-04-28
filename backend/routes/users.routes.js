@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
- 
+
 const upload = multer({ storage });
 
 router.post("/register", registerUser);

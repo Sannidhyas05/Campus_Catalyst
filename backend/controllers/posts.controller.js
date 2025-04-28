@@ -171,10 +171,9 @@ export const getPosts = async (req, res) => {
     const posts = await Post.find()
       .populate({
         path: "userId",
-        select: "username profile",
+        select: "username profile name",
         populate: {
           path: "profile",
-          model: "Profile", // optional if schema ref is set correctly
           select: "profilePicture",
         },
       })

@@ -35,20 +35,20 @@
     width: 18rem;
     min-width: 16rem;
     padding: 2rem 1rem;
+    padding-top: 0%;
     border-right: 1px solid #e5e7eb;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    box-shadow: 0 8px 8px 0 skyblue;
     position: sticky;
     overflow-y: auto;
   }
   
   .feedContainer {
     flex: 1;
-    padding: 2rem;
     overflow-y: auto;
+    box-shadow: 0 8px 8px 0 skyblue;
   }
   
   .extraContainer {
@@ -59,7 +59,6 @@
     background-color: #ffffff;
     position: sticky;
     overflow-y: auto;
-    box-shadow: 0 8px 8px 0 skyblue;
   }
   
   .navItem {
@@ -89,5 +88,10 @@
     font-size: 0.95rem;
     color: #333;
     border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+
+  .extraContainer_profiles:hover {
+    background-color: #f3f4f6;
   }
   

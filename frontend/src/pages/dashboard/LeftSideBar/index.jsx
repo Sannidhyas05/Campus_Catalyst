@@ -18,7 +18,7 @@ const navItems = [
   { href: "/teams", label: "Teams", icon: FaUsers },
   { href: "/requests", label: "Requests", icon: FaInbox },
   { href: "/createPost", label: "Create Post", icon: FaPen },
-  { href: "/profile", label: "Profile", icon: FaUser },
+  { href: "/profilePage", label: "Profile", icon: FaUser },
 ];
 
 export default function LeftSidebar() {

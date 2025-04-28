@@ -3,10 +3,6 @@ import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema(
   {
-    profile: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Profile",
-    },
     sapId: {
       type: String,
       required: true,
@@ -31,12 +27,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      required: true,
     },
     role: {
       type: String,
       enum: ["Student", "Teacher", "Admin"], // Updated to only three roles
       required: true,
+    },
+    profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Profile",
     },
     department: {
       type: String,

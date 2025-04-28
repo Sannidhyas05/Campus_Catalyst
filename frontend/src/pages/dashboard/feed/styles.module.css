@@ -1,13 +1,10 @@
 .postCard {
-  border: 1px solid #ddd;
-  border-radius: 12px;
   padding: 1rem;
-  margin-bottom: 2rem;
   background-color: #fff;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 8px 8px 0 skyblue;
+  border-bottom: rgba(219, 219, 219, 1)1px solid;
 }
 
 .postHeader {
@@ -22,7 +19,7 @@
   object-fit: cover;
   border-radius: 50%;
   margin-right: 12px;
-  border: 2px solid #f0f0f0;
+  border: 2px solid #aca6a6;
 }
 
 .userInfo {
@@ -30,16 +27,26 @@
   flex-direction: column;
 }
 
-.userInfo span {
-  font-weight: bold;
-  font-size: 14px;
+.usernameRow {
+  display: flex;
+  align-items: center;
+  gap: 6px; 
+
 }
 
-.userInfo p {
-  font-size: 11px;
-  color: gray;
+.usernameRow span {
+  font-weight: bold;
+  font-size: 15px;
+  font-weight: var(--font-weight-system-semibold);
+}
+
+.timeText {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.738);
   margin: 0;
 }
+
 
 .postContent {
   margin-top: 0.5rem;
@@ -54,7 +61,52 @@
 
 .postImage {
   width: 100%;
-  max-height: 450px;
+  max-height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  
+}
+
+.postActions {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 8px 12px;
+}
+
+.actionIcons {
+  display: flex;
+  gap: 16px;
+  
+}
+
+.actionIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+}
+
+.actionIcon:hover {
+  transform: scale(1.2);
+}
+
+
+.postDetails {
+  padding: 0;
+}
+
+.postCaption {
+  margin: 8px 0;
+}
+
+.boldUsername {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.viewComments {
+  color: grey;
+  font-size: 14px;
+  padding: 0;
 }

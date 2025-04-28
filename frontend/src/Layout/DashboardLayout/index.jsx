@@ -39,11 +39,16 @@ export default function DashboardLayout({ children }) {
           {authState.allProfilesFetched && authState.allUsers?.length > 0 ? (
             authState.allUsers.map((profile) => (
               <div key={profile._id} className={styles.extraContainer_profiles}>
-                <p>{profile.user?.username || profile.user?.name}</p>
+                <p
+                  onClick={() => router.push(`/profilePage/`)}
+                  className={styles.profileLink}
+                >
+                  {profile.user?.username || profile.user?.name}
+                </p>
               </div>
             ))
           ) : (
-            <p>No profiles found</p>
+            <p>No profiles available.</p>
           )}
         </div>
       </div>

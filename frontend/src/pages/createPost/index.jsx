@@ -4,6 +4,7 @@ import UserLayout from "@/Layout/UserLayout";
 import styles from "./styles.module.css";
 import { useDispatch } from "react-redux";
 import { createPost } from "@/config/redux/action/postAction";
+import { toast } from "react-hot-toast"; 
 
 export default function CreatePosts() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function CreatePosts() {
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,11 +25,13 @@ export default function CreatePosts() {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.content && !selectedFile) {
-      return alert("Can't create an empty post! Add content or an image.");
+      toast.error("Can't create an empty post! Add content or an image.");
+      return;
     }
 
     const postData = new FormData();
@@ -37,10 +41,18 @@ export default function CreatePosts() {
       postData.append("media", selectedFile);
     }
 
-    dispatch(createPost(postData));
-
-    setFormData({ content: "", type: "general" });
-    setSelectedFile(null);
+    try {
+      setLoading(true);
+      await dispatch(createPost(postData));
+      setFormData({ content: "", type: "general" });
+      setSelectedFile(null);
+      toast.success("Post created successfully! 🎉"); 
+    } catch (error) {
+      console.error("Error creating post:", error);
+      toast.error("Failed to create post. Please try again."); 
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,7 +69,6 @@ export default function CreatePosts() {
               onChange={handleChange}
               placeholder="Write your post..."
               rows="5"
-              required
             />
 
             <label>Attach Image:</label>
@@ -74,10 +85,15 @@ export default function CreatePosts() {
               </div>
             )}
 
-            <button type="submit">Submit Post</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Posting..." : "Submit Post"}
+            </button>
           </form>
         </div>
       </DashboardLayout>
     </UserLayout>
   );
 }
+
+
+//profileId in post model was reqwuired..
